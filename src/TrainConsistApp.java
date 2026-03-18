@@ -6,19 +6,19 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // UC5 — LinkedHashSet (order + uniqueness)
-        LinkedHashSet<String> train = new LinkedHashSet<>();
+        // UC6 — HashMap for bogie -> capacity
+        HashMap<String, Integer> bogieCapacity = new HashMap<>();
 
-        // ADD bogies
-        train.add("Engine");
-        train.add("Sleeper");
-        train.add("Cargo");
-        train.add("Guard");
+        // ADD key-value pairs
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 60);
+        bogieCapacity.put("First Class", 40);
 
-        // ADD duplicate
-        train.add("Sleeper"); // will be ignored
+        // DISPLAY using entrySet
+        System.out.println("Bogie Capacity Details:");
 
-        // DISPLAY final formation
-        System.out.println("Train Formation: " + train);
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
     }
 }
