@@ -6,28 +6,19 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // UC4 — LinkedList for ordered bogies
-        LinkedList<String> train = new LinkedList<>();
+        // UC5 — LinkedHashSet (order + uniqueness)
+        LinkedHashSet<String> train = new LinkedHashSet<>();
 
         // ADD bogies
         train.add("Engine");
         train.add("Sleeper");
-        train.add("AC");
         train.add("Cargo");
         train.add("Guard");
 
-        System.out.println("Initial Train: " + train);
+        // ADD duplicate
+        train.add("Sleeper"); // will be ignored
 
-        // INSERT Pantry at position 2
-        train.add(2, "Pantry");
-
-        System.out.println("After Adding Pantry: " + train);
-
-        // REMOVE first and last
-        train.removeFirst();
-        train.removeLast();
-
-        // FINAL OUTPUT
-        System.out.println("Final Train Consist: " + train);
+        // DISPLAY final formation
+        System.out.println("Train Formation: " + train);
     }
 }
