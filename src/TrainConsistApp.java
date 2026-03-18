@@ -8,14 +8,17 @@ public class TrainConsistApp {
 
         List<String> trainConsist = new ArrayList<>();
 
-        // UC2 — Add Bogies
+        // UC2 (existing)
         trainConsist.add("Engine");
         trainConsist.add("Sleeper");
         trainConsist.add("AC");
         trainConsist.add("General");
 
-        // Display Bogies
-        System.out.println("Train Bogies: " + trainConsist);
+        // UC3 — Remove a bogie
+        trainConsist.remove("General");
+
+        // Display updated train
+        System.out.println("Updated Train Bogies: " + trainConsist);
 
         // Count
         System.out.println("Total Bogies: " + trainConsist.size());
