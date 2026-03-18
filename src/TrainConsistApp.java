@@ -8,8 +8,16 @@ public class TrainConsistApp {
 
         List<String> trainConsist = new ArrayList<>();
 
-        System.out.println("Initial Bogie Count: " + trainConsist.size());
+        // UC2 — Add Bogies
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("General");
 
-        System.out.println("Train system initialized successfully.");
+        // Display Bogies
+        System.out.println("Train Bogies: " + trainConsist);
+
+        // Count
+        System.out.println("Total Bogies: " + trainConsist.size());
     }
 }
