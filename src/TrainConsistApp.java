@@ -1,20 +1,30 @@
-import java.util.Arrays;
-
-public class UC17SortBogieNames {
+public class UC18LinearSearchBogieID {
 
     public static void main(String[] args) {
 
-        // Step 1: Bogie type names
-        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Cargo"};
+        // Step 1: Bogie IDs (unsorted)
+        String[] bogieIDs = {"B101", "B205", "B309", "B412", "B550"};
 
-        System.out.println("Before Sorting:");
-        System.out.println(Arrays.toString(bogieNames));
+        // Step 2: Search key
+        String searchKey = "B309";
 
-        // Step 2: Built-in sort
-        Arrays.sort(bogieNames);
+        // Step 3: Linear search
+        boolean found = false;
 
-        // Step 3: Display sorted result
-        System.out.println("After Sorting (Alphabetical):");
-        System.out.println(Arrays.toString(bogieNames));
+        for (int i = 0; i < bogieIDs.length; i++) {
+
+            if (bogieIDs[i].equals(searchKey)) {
+                System.out.println("Bogie found at index: " + i);
+                found = true;
+                break; // early termination
+            }
+        }
+
+        // Step 4: Result
+        if (!found) {
+            System.out.println("Bogie ID NOT found ❌");
+        } else {
+            System.out.println("Search completed successfully ✅");
+        }
     }
 }
