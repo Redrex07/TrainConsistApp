@@ -1,57 +1,35 @@
-public class UC15CargoSafety {
+import java.util.*;
 
-    // Custom Runtime Exception
-    static class CargoSafetyException extends RuntimeException {
-        public CargoSafetyException(String message) {
-            super(message);
-        }
-    }
-
-    // Bogie class
-    static class Bogie {
-        private String shape;
-        private String cargo;
-
-        public Bogie(String shape) {
-            this.shape = shape;
-        }
-
-        public void assignCargo(String cargo) {
-            try {
-                System.out.println("Assigning cargo: " + cargo + " to " + shape + " bogie");
-
-                // Safety rule
-                if (shape.equals("Rectangular") && cargo.equals("Petroleum")) {
-                    throw new CargoSafetyException(
-                            "Unsafe assignment! Petroleum cannot be stored in Rectangular bogie."
-                    );
-                }
-
-                this.cargo = cargo;
-                System.out.println("Cargo assigned successfully ✅");
-
-            } catch (CargoSafetyException e) {
-                System.out.println("Exception caught ❌: " + e.getMessage());
-
-            } finally {
-                System.out.println("Finalizing assignment process for " + shape + " bogie\n");
-            }
-        }
-
-        @Override
-        public String toString() {
-            return shape + " Bogie -> Cargo: " + cargo;
-        }
-    }
+public class UC16BubbleSortBogies {
 
     public static void main(String[] args) {
 
-        Bogie b1 = new Bogie("Cylindrical");
-        b1.assignCargo("Petroleum");
+        // Step 1: Passenger bogie capacities
+        int[] capacities = {72, 54, 24, 90, 60};
 
-        Bogie b2 = new Bogie("Rectangular");
-        b2.assignCargo("Petroleum"); // unsafe case
+        System.out.println("Before Sorting:");
+        System.out.println(Arrays.toString(capacities));
 
-        System.out.println("Program continues safely ✅");
+        // Step 2: Bubble Sort
+        int n = capacities.length;
+
+        for (int i = 0; i < n - 1; i++) {
+
+            for (int j = 0; j < n - i - 1; j++) {
+
+                // Compare adjacent elements
+                if (capacities[j] > capacities[j + 1]) {
+
+                    // Swap
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        // Step 3: Output sorted array
+        System.out.println("After Sorting (Bubble Sort):");
+        System.out.println(Arrays.toString(capacities));
     }
 }
