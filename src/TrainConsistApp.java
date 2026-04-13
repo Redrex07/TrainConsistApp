@@ -1,18 +1,15 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class UC9GroupBogies {
+public class UC10TotalSeats {
 
     // Inner Bogie class
     static class Bogie {
         private String name;
         private int capacity;
-        private String type; // NEW: type for grouping
 
-        public Bogie(String name, int capacity, String type) {
+        public Bogie(String name, int capacity) {
             this.name = name;
             this.capacity = capacity;
-            this.type = type;
         }
 
         public String getName() {
@@ -23,13 +20,9 @@ public class UC9GroupBogies {
             return capacity;
         }
 
-        public String getType() {
-            return type;
-        }
-
         @Override
         public String toString() {
-            return name + " (" + capacity + ")";
+            return name + " - Capacity: " + capacity;
         }
     }
 
@@ -37,23 +30,17 @@ public class UC9GroupBogies {
 
         // Step 1: Create list
         List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", 72, "Passenger"));
-        bogies.add(new Bogie("AC Chair", 54, "Passenger"));
-        bogies.add(new Bogie("First Class", 24, "Passenger"));
-        bogies.add(new Bogie("Cargo Box", 100, "Goods"));
-        bogies.add(new Bogie("Oil Tanker", 80, "Goods"));
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 54));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 90));
 
-        // Step 2: Group using stream
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getType));
+        // Step 2: map + reduce
+        int totalCapacity = bogies.stream()
+                .map(b -> b.getCapacity())
+                .reduce(0, Integer::sum);
 
-        // Step 3: Display grouped result
-        System.out.println("Grouped Bogies:");
-        for (String type : groupedBogies.keySet()) {
-            System.out.println("\nType: " + type);
-            for (Bogie b : groupedBogies.get(type)) {
-                System.out.println(b);
-            }
-        }
+        // Step 3: Display result
+        System.out.println("Total Seating Capacity: " + totalCapacity);
     }
 }
