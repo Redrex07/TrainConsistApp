@@ -1,44 +1,46 @@
-import java.util.Arrays;
+import java.util.*;
 
-public class UC19BinarySearchBogieID {
+public class UC20SearchExceptionHandling {
 
     public static void main(String[] args) {
 
-        // Step 1: Sorted bogie IDs (REQUIRED for binary search)
-        String[] bogieIDs = {"B101", "B205", "B309", "B412", "B550"};
+        // Step 1: Bogie list (you can make it empty to test exception)
+        List<String> bogies = new ArrayList<>();
+        bogies.add("B101");
+        bogies.add("B205");
+        bogies.add("B309");
 
-        // Step 2: Search key
+        // Search key
         String searchKey = "B309";
 
-        // Step 3: Binary search setup
-        int low = 0;
-        int high = bogieIDs.length - 1;
-        boolean found = false;
+        try {
 
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            int result = bogieIDs[mid].compareTo(searchKey);
-
-            if (result == 0) {
-                System.out.println("Bogie found at index: " + mid);
-                found = true;
-                break;
+            // Step 2: Validate state BEFORE searching
+            if (bogies.isEmpty()) {
+                throw new IllegalStateException("No bogies available in the train!");
             }
-            else if (result < 0) {
-                low = mid + 1; // search right half
+
+            // Step 3: Linear search logic
+            boolean found = false;
+
+            for (String bogie : bogies) {
+                if (bogie.equals(searchKey)) {
+                    System.out.println("Bogie found: " + bogie);
+                    found = true;
+                    break;
+                }
             }
-            else {
-                high = mid - 1; // search left half
+
+            if (!found) {
+                System.out.println("Bogie NOT found ❌");
+            } else {
+                System.out.println("Search completed successfully ✅");
             }
+
+        } catch (IllegalStateException e) {
+            System.out.println("Exception caught ❌: " + e.getMessage());
         }
 
-        // Step 4: Result
-        if (!found) {
-            System.out.println("Bogie ID NOT found ❌");
-        } else {
-            System.out.println("Binary search completed successfully ✅");
-        }
+        System.out.println("Program continues safely 🚆");
     }
 }
