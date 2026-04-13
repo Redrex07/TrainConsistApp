@@ -1,45 +1,56 @@
-public class UC14InvalidCapacity {
+public class UC15CargoSafety {
 
-    // Custom Exception
-    static class InvalidCapacityException extends Exception {
-        public InvalidCapacityException(String message) {
+    // Custom Runtime Exception
+    static class CargoSafetyException extends RuntimeException {
+        public CargoSafetyException(String message) {
             super(message);
         }
     }
 
-    // Bogie class with validation
+    // Bogie class
     static class Bogie {
-        private String name;
-        private int capacity;
+        private String shape;
+        private String cargo;
 
-        public Bogie(String name, int capacity) throws InvalidCapacityException {
-            if (capacity <= 0) {
-                throw new InvalidCapacityException(
-                        "Invalid capacity for " + name + ": " + capacity
-                );
+        public Bogie(String shape) {
+            this.shape = shape;
+        }
+
+        public void assignCargo(String cargo) {
+            try {
+                System.out.println("Assigning cargo: " + cargo + " to " + shape + " bogie");
+
+                // Safety rule
+                if (shape.equals("Rectangular") && cargo.equals("Petroleum")) {
+                    throw new CargoSafetyException(
+                            "Unsafe assignment! Petroleum cannot be stored in Rectangular bogie."
+                    );
+                }
+
+                this.cargo = cargo;
+                System.out.println("Cargo assigned successfully ✅");
+
+            } catch (CargoSafetyException e) {
+                System.out.println("Exception caught ❌: " + e.getMessage());
+
+            } finally {
+                System.out.println("Finalizing assignment process for " + shape + " bogie\n");
             }
-            this.name = name;
-            this.capacity = capacity;
         }
 
         @Override
         public String toString() {
-            return name + " - Capacity: " + capacity;
+            return shape + " Bogie -> Cargo: " + cargo;
         }
     }
 
     public static void main(String[] args) {
 
-        try {
-            Bogie b1 = new Bogie("Sleeper", 72);
-            System.out.println("Created: " + b1);
+        Bogie b1 = new Bogie("Cylindrical");
+        b1.assignCargo("Petroleum");
 
-            Bogie b2 = new Bogie("AC Chair", -10); // invalid
-            System.out.println("Created: " + b2);
-
-        } catch (InvalidCapacityException e) {
-            System.out.println("Exception caught ❌: " + e.getMessage());
-        }
+        Bogie b2 = new Bogie("Rectangular");
+        b2.assignCargo("Petroleum"); // unsafe case
 
         System.out.println("Program continues safely ✅");
     }
