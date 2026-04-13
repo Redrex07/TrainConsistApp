@@ -1,8 +1,9 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class UC7SortBogies {
+public class UC8FilterBogies {
 
-    // Bogie class (inner class so everything is in one file)
+    // Inner Bogie class
     static class Bogie {
         private String name;
         private int capacity;
@@ -28,20 +29,21 @@ public class UC7SortBogies {
 
     public static void main(String[] args) {
 
-        // Create list
+        // Step 1: Create list (reuse UC7 idea)
         List<Bogie> bogies = new ArrayList<>();
-
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 54));
         bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("General", 90));
 
-        // Sort using Comparator (lambda)
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        // Step 2: Convert to stream + filter
+        List<Bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        // Display result
-        System.out.println("Sorted Bogies by Capacity:");
-        for (Bogie b : bogies) {
+        // Step 3: Display result
+        System.out.println("Filtered Bogies (Capacity > 60):");
+        for (Bogie b : filteredBogies) {
             System.out.println(b);
         }
     }
